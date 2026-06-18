@@ -3,24 +3,28 @@ package com.plataforma.Vapor.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "usuarios_steam")
+@Table(name = "Steam_users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class SteamUser {
 
     @Id
-    private Long steamId;
+    private Long id;
     
-    private String apodo;
+    @NotBlank
+    private String username;
     
-    private String nombreReal;
+    private String realname;
 
-    private int personaState;
+    @NotNull
+    private int conectionState;
 
 }

@@ -17,5 +17,6 @@ public class SteamWebClientConfig {
         return WebClient.builder()
                 .baseUrl(steamConfig.getApiUrl())
                 .build();
+                
     }
 }

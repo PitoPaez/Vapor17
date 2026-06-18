@@ -25,14 +25,15 @@ public class SteamUserDTO {
     @NoArgsConstructor
     public static class PlayerDTO {
         @JsonProperty("steamid")
-        private Long steamId;
+        private Long steamid;
         
         @JsonProperty("personaname")
-        private String apodo;
+        private String personaname;
 
         @JsonProperty("realname")
-        private String nombrereal;
+        private String realname;
         
         private int personastate;
+
     }
 }
