@@ -1,5 +1,7 @@
 package com.plataforma.Vapor.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,19 @@ public class SteamUserController {
             return ResponseEntity.ok(profile);
         } catch (RuntimeException e) {
             System.out.println("Validation error within Service when finding profile");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            System.out.println("Request made to Service from Controller to list all users");
+            List<SteamUser> users = steamUserService.getAllUsers();
+            System.out.println("Passed validation for listing all users within Service");
+            return ResponseEntity.ok(users);
+        } catch (RuntimeException e) {
+            System.out.println("Validation error within Service when listing users");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }

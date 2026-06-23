@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
+import java.util.List;
 import com.plataforma.Vapor.config.SteamConfig;
 import com.plataforma.Vapor.dto.SteamGameDTO;
 import com.plataforma.Vapor.dto.SteamUserDTO;
@@ -49,6 +49,17 @@ public class SteamUserService {
         }
 
         return apiUser.getResponse().getPlayers().get(0);
+    }
+
+    public List<SteamUser> getAllUsers() {
+        List<SteamUser> users = steamUserRepository.findAll();
+        
+        // Validación: Si no existen usuarios en la BD todavía, se dispara la excepción
+        if (users.isEmpty()) {
+            throw new RuntimeException("No users found in the personal database.");
+        }
+        
+        return users;
     }
 
     public SteamUser registerSteamUser(Long steamId) {

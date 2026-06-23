@@ -1,5 +1,7 @@
 package com.plataforma.Vapor.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -9,7 +11,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
 @Entity
 @Table(name = "steam_users")
@@ -27,7 +28,7 @@ public class SteamUser {
     private String realname;
 
     @NotNull
-    private int conectionState;
+    private Integer conectionState;
 
     @ManyToMany
     private List<SteamGame> library;   
