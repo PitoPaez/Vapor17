@@ -30,7 +30,7 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
-    @Bean
+     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             // Deshabilita CSRF (no es necesario en APIs REST stateless con JWT)
@@ -45,8 +45,15 @@ public class SecurityConfig {
                 // Endpoints de autenticación: públicos (no requieren token)
                 .requestMatchers("/api/v1/auth/**").permitAll()
 
+                // Swagger UI y OpenAPI docs: públicos
+                .requestMatchers(
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/v3/api-docs/**"
+                ).permitAll()
+
                 // Lectura (GET): cualquier usuario autenticado (USER o ADMIN)
-                .requestMatchers(HttpMethod.GET, "/api/v1/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/v1/steam/**").hasAnyRole("USER", "ADMIN")
 
                 // Escritura (POST, PUT, DELETE): solo ADMIN
                 .requestMatchers(HttpMethod.POST, "/api/v1/**").hasRole("ADMIN")
